@@ -1,5 +1,8 @@
 package com.tpr.engine;
 
+
+import com.tpr.engine.repository.DeploymentBuilder;
+
 /**
  * @author canghaihongxin
  * @version 1.0
@@ -7,4 +10,6 @@ package com.tpr.engine;
  * @date 2023/4/11 13:48
  */
 public interface RepositoryService {
+
+    DeploymentBuilder createDeployment();
 }
