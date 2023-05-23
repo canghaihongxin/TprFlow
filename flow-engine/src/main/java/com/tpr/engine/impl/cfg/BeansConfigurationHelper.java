@@ -5,7 +5,10 @@ import com.tpr.engine.ProcessEngineConfiguration;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+
+import java.io.InputStream;
 
 /**
  * @author 田培融
@@ -53,4 +56,14 @@ public class BeansConfigurationHelper {
         //实例化流程配置文件中的bean
         return parseProcessEngineConfiguration(springResource, beanName);
     }
+
+
+    public static ProcessEngineConfiguration parseProcessEngineConfigurationFromInputStream(InputStream inputStream, String beanName) {
+        //  将inputstream 转化为Spring的resource对象
+        Resource springResource = new InputStreamResource(inputStream);
+        //实例化流程配置文件中的bean
+        return parseProcessEngineConfiguration(springResource, beanName);
+    }
+
+
 }

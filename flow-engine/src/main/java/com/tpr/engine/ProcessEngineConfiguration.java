@@ -2,6 +2,11 @@ package com.tpr.engine;
 
 import com.tpr.engine.impl.cfg.BeansConfigurationHelper;
 import com.tpr.engine.runtime.Clock;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+
+import java.io.InputStream;
 
 /**
  * Configuration information from which a process engine can be build.
@@ -68,11 +73,20 @@ import com.tpr.engine.runtime.Clock;
 public abstract class ProcessEngineConfiguration implements EngineServices {
 
 
+    /**
+     * Either use Class.forName or ClassLoader.loadClass for class loading.
+     * See http://forums.activiti.org/content/reflectutilloadclass-and-custom-classloader
+     */
+    protected boolean useClassForNameClassLoading = true;
+
 
     protected Clock clock;
 
 
     protected String processEngineName = ProcessEngines.NAME_DEFAULT;
+
+
+    protected ClassLoader classLoader;
 
     protected ProcessEngineConfiguration() {
     }
@@ -101,10 +115,32 @@ public abstract class ProcessEngineConfiguration implements EngineServices {
         return createProcessEngineConfigurationFromResource(resource, "processEngineConfiguration");
     }
 
-    /*
-  两个 参数都可以自定义
- */
+    /**
+     两个 参数都可以自定义
+    */
     public static ProcessEngineConfiguration createProcessEngineConfigurationFromResource(String resource, String beanName) {
         return BeansConfigurationHelper.parseProcessEngineConfigurationFromResource(resource, beanName);
     }
+
+
+    public ClassLoader getClassLoader() {
+        return classLoader;
+    }
+
+
+    public boolean isUseClassForNameClassLoading() {
+        return useClassForNameClassLoading;
+    }
+
+
+    public static ProcessEngineConfiguration createProcessEngineConfigurationFromInputStream(InputStream inputStream) {
+        return createProcessEngineConfigurationFromInputStream(inputStream, "processEngineConfiguration");
+    }
+
+    public static ProcessEngineConfiguration createProcessEngineConfigurationFromInputStream(InputStream inputStream, String beanName) {
+        return BeansConfigurationHelper.parseProcessEngineConfigurationFromInputStream(inputStream, beanName);
+    }
+
+
+
 }

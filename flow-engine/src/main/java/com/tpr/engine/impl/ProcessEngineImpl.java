@@ -36,4 +36,9 @@ public class ProcessEngineImpl implements ProcessEngine {
     public void close() {
 
     }
+
+    @Override
+    public RepositoryService getRepositoryService() {
+        return repositoryService;
+    }
 }

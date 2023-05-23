@@ -34,7 +34,7 @@ package com.tpr.engine;
  * @author 田培融
  * @desc 继承了  EngineServices 接口 并且增加了 对流程引擎名称的获取以及关闭流程引擎的支持
  */
-public interface ProcessEngine {
+public interface ProcessEngine extends EngineServices {
 
     /** the version of the activiti library */
     public static String VERSION = "5.22.0.0";
